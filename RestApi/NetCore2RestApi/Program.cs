@@ -19,6 +19,7 @@ namespace NetCore2RestApi
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .CaptureStartupErrors(true) //startapın patlamaması için
                 .UseStartup<Startup>()
                 .Build();
     }

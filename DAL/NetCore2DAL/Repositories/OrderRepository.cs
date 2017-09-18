@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NetCore2DAL.Entities;
 using NetCore2DAL.Context;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace NetCore2DAL.Repositories
 {
@@ -18,6 +19,7 @@ namespace NetCore2DAL.Repositories
 
         public Order Create(Order order)
         {
+            
             _context.Orders.Add(order);
             return order;
         }
@@ -36,6 +38,8 @@ namespace NetCore2DAL.Repositories
 
         public List<Order> GetAll()
         {
+            //orderları müşterileri ile birlikte liste olarak bas
+            //return _context.Orders.Include(o => o.Customer).ToList();
             return _context.Orders.ToList();
         }
     }

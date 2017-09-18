@@ -11,7 +11,7 @@ namespace NetCore2BLL.Services
     public class OrderService : IOrderService
     {
         OrderConverter conv = new OrderConverter();
-        DalFacade _facade;
+        private DalFacade _facade;
 
         public OrderService(DalFacade facade)
         {
@@ -42,7 +42,10 @@ namespace NetCore2BLL.Services
         {
             using (var uow = _facade.UnitOfWork)
             {
-                return conv.Convert(uow.OrderRepository.Get(Id));
+                var orderEntity = uow.OrderRepository.Get(Id);
+                orderEntity.Customer = uow.CustomerRepository.Get(orderEntity.CustomerId);
+
+                return conv.Convert(orderEntity);
             }
         }
 
@@ -66,7 +69,10 @@ namespace NetCore2BLL.Services
 
                 orderFromDb.DeliveryDate = order.DeliveryDate;
                 orderFromDb.OrderDate = order.OrderDate;
+                orderFromDb.CustomerId = order.CustomerId;
                 uow.Complete();
+
+                orderFromDb.Customer = uow.CustomerRepository.Get(orderFromDb.CustomerId);
                 return conv.Convert(orderFromDb);
             }
         }

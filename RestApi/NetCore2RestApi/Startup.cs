@@ -35,7 +35,7 @@ namespace NetCore2RestApi
             {
                 app.UseDeveloperExceptionPage();
                 var facade = new BLLFacade();
-                facade.CustomerService.Create(
+                var cust = facade.CustomerService.Create(
                     new CustomerBO() {
                         FirstName="Emir",
                         LastName = "Hazir",
@@ -48,6 +48,21 @@ namespace NetCore2RestApi
                         LastName = "Hazir",
                         Address = "Ankara"
                     });
+                //facade.OrderService.Create(
+                //new OrderBO()
+                //{
+                //    DeliveryDate = DateTime.Now.AddMonths(1),
+                //    OrderDate = DateTime.Now.AddMonths(-1),
+                //    Customer = cust
+                //});
+                for (int i = 0; i < 10000; i++)
+                {
+                    facade.OrderService.Create(new OrderBO(){
+                        DeliveryDate = DateTime.Now.AddMonths(1),
+                        OrderDate = DateTime.Now.AddMonths(-1),
+                        CustomerId = cust.Id
+                    });
+                }
             }
 
             app.UseMvc();
