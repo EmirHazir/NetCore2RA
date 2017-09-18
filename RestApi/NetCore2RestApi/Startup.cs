@@ -35,18 +35,26 @@ namespace NetCore2RestApi
             {
                 app.UseDeveloperExceptionPage();
                 var facade = new BLLFacade();
+                var address = facade.AddressService.Create(
+                    new AddressBO()
+                    {
+                        City = "Ankara",
+                        Street = "eryaman",
+                        Number = "19"
+                    });
+
                 var cust = facade.CustomerService.Create(
                     new CustomerBO() {
                         FirstName="Emir",
                         LastName = "Hazir",
-                        Address ="Ankara"
+                        Addresses = new List<AddressBO>() { address}
                     });
                 facade.CustomerService.Create(
                     new CustomerBO()
                     {
                         FirstName = "Aziz",
                         LastName = "Hazir",
-                        Address = "Ankara"
+                        Addresses = new List<AddressBO>() { address }
                     });
                 //facade.OrderService.Create(
                 //new OrderBO()

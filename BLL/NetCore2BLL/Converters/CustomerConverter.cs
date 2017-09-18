@@ -1,10 +1,13 @@
 ﻿using NetCore2BLL.BusinessObjects;
 using NetCore2DAL.Entities;
+using System.Linq;
 
 namespace NetCore2BLL.Converters
 {
     public class CustomerConverter
     {
+
+        private AddressConverter aConv;
         internal Customer Convert(CustomerBO cust)
         {
             if (cust == null)
@@ -14,7 +17,7 @@ namespace NetCore2BLL.Converters
             return new Customer()
             {
                 Id = cust.Id,
-                Address = cust.Address,
+                Addresses = cust.Addresses.Select(aConv.Convert).ToList(),
                 FirstName = cust.FirstName,
                 LastName = cust.LastName
             };
@@ -29,7 +32,7 @@ namespace NetCore2BLL.Converters
             return new CustomerBO()
             {
                 Id = cust.Id,
-                Address = cust.Address,
+                Addresses = cust.Addresses.Select(aConv.Convert).ToList(),
                 FirstName = cust.FirstName,
                 LastName = cust.LastName
             };

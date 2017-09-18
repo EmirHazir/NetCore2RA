@@ -17,5 +17,10 @@ namespace NetCore2BLL
         {
             get { return new OrderService(new DalFacade()); }
         }
+
+        public IAddressService AddressService
+        {
+            get { return new AddressService(new DalFacade()); }
+        }
     }
 }

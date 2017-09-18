@@ -67,6 +67,9 @@ namespace NetCore2BLL.Services
             }
         }
 
+       
+
+
         public CustomerBO Update(CustomerBO cust)
         {
             using (var uow = facade.UnitOfWork)
@@ -77,9 +80,10 @@ namespace NetCore2BLL.Services
                     throw new InvalidOperationException("Customer not found");
                 }
 
-                customerFromDb.FirstName = cust.FirstName;
-                customerFromDb.LastName = cust.LastName;
-                customerFromDb.Address = cust.Address;
+                var customerUpdated = conv.Convert(cust);
+                customerFromDb.FirstName = customerUpdated.FirstName;
+                customerFromDb.LastName = customerUpdated.LastName;
+                customerFromDb.Adresses = customerUpdated.Addresses;
                 uow.Complete();
                 return conv.Convert(customerFromDb);
             }

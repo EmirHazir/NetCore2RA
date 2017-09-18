@@ -18,6 +18,6 @@ namespace NetCore2DAL.Entities
         public List<Order> Orders { get; set; }
 
         //Bir müşterinin de birden fazla adresi olabilit
-        public List<Address> Adresses { get; set; }
+        public List<Address> Addresses { get; set; }
     }
 }

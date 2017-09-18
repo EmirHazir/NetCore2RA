@@ -1,4 +1,6 @@
-﻿namespace NetCore2BLL.BusinessObjects
+﻿using System.Collections.Generic;
+
+namespace NetCore2BLL.BusinessObjects
 {
     public class CustomerBO
     {
@@ -14,6 +16,6 @@
 
         }
 
-        public string Address { get; set; }
+        public List<AddressBO> Addresses { get; set; }
     }
 }
